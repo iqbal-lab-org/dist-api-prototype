@@ -20,7 +20,7 @@ def distance_post(body):  # noqa: E501
         sample = Sample.from_dict(connexion.request.get_json())  # noqa: E501
 
         within_distance = get_db().query(DistanceORM).filter(
-            DistanceORM.s1 == sample.name and DistanceORM.d < 5
+            DistanceORM.s1 == sample.experiment_id and DistanceORM.d < 5
         ).all()
 
         return ApiResponse(

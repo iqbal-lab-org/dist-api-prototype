@@ -8,6 +8,6 @@ curl --request POST \
   --url http://localhost:8080/distance \
   --header 'content-type: application/json' \
   --data '{
-	"name": "SAMEA3281408"
+	"experiment_id": "SAMEA3281408"
 }'
 ```

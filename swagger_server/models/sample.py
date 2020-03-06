@@ -14,20 +14,20 @@ class Sample(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, name: str=None):  # noqa: E501
+    def __init__(self, experiment_id: str=None):  # noqa: E501
         """Sample - a model defined in Swagger
 
-        :param name: The name of this Sample.  # noqa: E501
-        :type name: str
+        :param experiment_id: The experiment_id of this Sample.  # noqa: E501
+        :type experiment_id: str
         """
         self.swagger_types = {
-            'name': str
+            'experiment_id': str
         }
 
         self.attribute_map = {
-            'name': 'name'
+            'experiment_id': 'experiment_id'
         }
-        self._name = name
+        self._experiment_id = experiment_id
 
     @classmethod
     def from_dict(cls, dikt) -> 'Sample':
@@ -41,22 +41,22 @@ class Sample(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def name(self) -> str:
-        """Gets the name of this Sample.
+    def experiment_id(self) -> str:
+        """Gets the experiment_id of this Sample.
 
 
-        :return: The name of this Sample.
+        :return: The experiment_id of this Sample.
         :rtype: str
         """
-        return self._name
+        return self._experiment_id
 
-    @name.setter
-    def name(self, name: str):
-        """Sets the name of this Sample.
+    @experiment_id.setter
+    def experiment_id(self, experiment_id: str):
+        """Sets the experiment_id of this Sample.
 
 
-        :param name: The name of this Sample.
-        :type name: str
+        :param experiment_id: The experiment_id of this Sample.
+        :type experiment_id: str
         """
 
-        self._name = name
+        self._experiment_id = experiment_id

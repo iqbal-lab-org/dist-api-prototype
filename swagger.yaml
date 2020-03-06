@@ -30,7 +30,7 @@ components:
     Sample:
       type: object
       properties:
-        name:
+        experiment_id:
           type: string
     ApiResponse:
       type: object
