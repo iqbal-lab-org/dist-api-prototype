@@ -18,6 +18,12 @@ paths:
         404:
           description: Sample not found
           content: {}
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
       x-codegen-request-body-name: sample
 components:
   schemas:
@@ -29,10 +35,9 @@ components:
     ApiResponse:
       type: object
       properties:
-        code:
-          type: integer
-          format: int32
         type:
           type: string
-        message:
+        subType:
           type: string
+        result:
+          type: object

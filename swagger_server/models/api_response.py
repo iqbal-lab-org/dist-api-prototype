@@ -14,30 +14,30 @@ class ApiResponse(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, code: int=None, type: str=None, message: str=None):  # noqa: E501
+    def __init__(self, type: str=None, sub_type: str=None, result: object=None):  # noqa: E501
         """ApiResponse - a model defined in Swagger
 
-        :param code: The code of this ApiResponse.  # noqa: E501
-        :type code: int
         :param type: The type of this ApiResponse.  # noqa: E501
         :type type: str
-        :param message: The message of this ApiResponse.  # noqa: E501
-        :type message: str
+        :param sub_type: The sub_type of this ApiResponse.  # noqa: E501
+        :type sub_type: str
+        :param result: The result of this ApiResponse.  # noqa: E501
+        :type result: object
         """
         self.swagger_types = {
-            'code': int,
             'type': str,
-            'message': str
+            'sub_type': str,
+            'result': object
         }
 
         self.attribute_map = {
-            'code': 'code',
             'type': 'type',
-            'message': 'message'
+            'sub_type': 'subType',
+            'result': 'result'
         }
-        self._code = code
         self._type = type
-        self._message = message
+        self._sub_type = sub_type
+        self._result = result
 
     @classmethod
     def from_dict(cls, dikt) -> 'ApiResponse':
@@ -49,27 +49,6 @@ class ApiResponse(Model):
         :rtype: ApiResponse
         """
         return util.deserialize_model(dikt, cls)
-
-    @property
-    def code(self) -> int:
-        """Gets the code of this ApiResponse.
-
-
-        :return: The code of this ApiResponse.
-        :rtype: int
-        """
-        return self._code
-
-    @code.setter
-    def code(self, code: int):
-        """Sets the code of this ApiResponse.
-
-
-        :param code: The code of this ApiResponse.
-        :type code: int
-        """
-
-        self._code = code
 
     @property
     def type(self) -> str:
@@ -93,22 +72,43 @@ class ApiResponse(Model):
         self._type = type
 
     @property
-    def message(self) -> str:
-        """Gets the message of this ApiResponse.
+    def sub_type(self) -> str:
+        """Gets the sub_type of this ApiResponse.
 
 
-        :return: The message of this ApiResponse.
+        :return: The sub_type of this ApiResponse.
         :rtype: str
         """
-        return self._message
+        return self._sub_type
 
-    @message.setter
-    def message(self, message: str):
-        """Sets the message of this ApiResponse.
+    @sub_type.setter
+    def sub_type(self, sub_type: str):
+        """Sets the sub_type of this ApiResponse.
 
 
-        :param message: The message of this ApiResponse.
-        :type message: str
+        :param sub_type: The sub_type of this ApiResponse.
+        :type sub_type: str
         """
 
-        self._message = message
+        self._sub_type = sub_type
+
+    @property
+    def result(self) -> object:
+        """Gets the result of this ApiResponse.
+
+
+        :return: The result of this ApiResponse.
+        :rtype: object
+        """
+        return self._result
+
+    @result.setter
+    def result(self, result: object):
+        """Sets the result of this ApiResponse.
+
+
+        :param result: The result of this ApiResponse.
+        :type result: object
+        """
+
+        self._result = result
