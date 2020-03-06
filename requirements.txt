@@ -1,0 +1,4 @@
+Flask-SQLAlchemy
+mysqlclient
+connexion == 1.1.15
+python_dateutil == 2.6.0

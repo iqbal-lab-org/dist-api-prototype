@@ -1,0 +1,38 @@
+openapi: 3.0.1
+info:
+  title: Distance API
+  version: 0.0.1
+servers:
+- url: https://mykro.be/
+- url: http://mykro.be/
+paths:
+  /distance:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sample/properties/name'
+        required: true
+      responses:
+        404:
+          description: Sample not found
+          content: {}
+      x-codegen-request-body-name: experiment_id
+components:
+  schemas:
+    Sample:
+      type: object
+      properties:
+        name:
+          type: string
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
