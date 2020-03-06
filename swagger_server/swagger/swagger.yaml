@@ -8,6 +8,7 @@ servers:
 paths:
   /distance:
     post:
+      operationId: distance_post
       requestBody:
         content:
           application/json:
@@ -15,10 +16,11 @@ paths:
               $ref: '#/components/schemas/Sample'
         required: true
       responses:
-        404:
+        "404":
           description: Sample not found
           content: {}
       x-codegen-request-body-name: sample
+      x-openapi-router-controller: swagger_server.controllers.default_controller
 components:
   schemas:
     Sample:
@@ -36,3 +38,4 @@ components:
           type: string
         message:
           type: string
+
