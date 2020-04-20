@@ -2,8 +2,7 @@
 
 from __future__ import absolute_import
 
-from flask import json
-from six import BytesIO
+from unittest.mock import patch, MagicMock
 
 from swagger_server.test import BaseTestCase
 
@@ -16,10 +15,14 @@ class TestDefaultController(BaseTestCase):
 
         
         """
-        response = self.client.open(
-            '//distance',
-            method='POST',
-            content_type='application/json')
+        mock_db = MagicMock()
+        mock_db.cypher_query.return_value = ([], None)
+        with patch('swagger_server.controllers.default_controller.db', new=mock_db):
+            response = self.client.open(
+                '/distance',
+                method='POST',
+                json={"experimental_id": "s1"},
+                content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
