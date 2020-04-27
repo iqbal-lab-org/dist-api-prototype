@@ -2,7 +2,22 @@
 language: python
 python:
   - "3.6"
-# command to install dependencies
-install: "pip install -r requirements.txt"
-# command to run tests
-script: nosetests
+
+addons:
+  apt:
+    sources:
+      - sourceline: 'deb https://debian.neo4j.com stable 3.5'
+        key_url: 'https://debian.neo4j.com/neotechnology.gpg.key'
+    packages:
+      - neo4j
+
+services:
+  - neo4j
+
+install: pip install tox-travis
+
+before_script:
+  - sudo sed -i 's/#dbms\.security\.auth_enabled=false/dbms.security.auth_enabled=false/' /etc/neo4j/neo4j.conf
+  - sudo systemctl restart neo4j
+
+script: tox
