@@ -60,12 +60,7 @@ docker stop dist
 
 ## Run tests
 ```shell script
-pip3 install tox
-tox
+./scripts/start_test_db.sh
+python3 -m unittest
+docker stop test_neo4j
 ```
-
-## Run individual tests
-```shell script
-nosetests --nologcapture swagger_server/test/<test_file>:<TestClass>.<test_method>
-```
-https://nose.readthedocs.io/en/latest/usage.html#extended-usage
