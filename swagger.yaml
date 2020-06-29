@@ -24,7 +24,7 @@ paths:
   /samples:
     post:
       tags:
-        - sample
+        - samples_post
       description: Add a new sample. Duplicates are not allowed
       requestBody:
         description: Sample to be added
@@ -46,6 +46,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        400:
+          description: Ambiguous (duplicated neighbours)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         default:
           description: Unexpected error
           content:
@@ -54,6 +60,8 @@ paths:
                 $ref: '#/components/schemas/Error'
   /samples/{id}:
     get:
+      tags:
+        - samples_get
       description: Return a sample based on a sample ID.
       parameters:
         - name: id
@@ -81,6 +89,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     delete:
+      tags:
+        - samples_delete
       description: Delete a sample based on a sample ID.
       parameters:
         - name: id
@@ -106,7 +116,7 @@ paths:
   /samples/{id}/nearest-neighbours:
     get:
       tags:
-        - distance
+        - neighbours_get
       description: Return the list of nearest neighbours of a sample based on a sample ID.
       parameters:
         - name: id
@@ -136,6 +146,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     put:
+      tags:
+        - neighbours_put
       description: Replace the list of nearest neighbours of a sample based on a sample ID.
       parameters:
         - name: id
@@ -176,7 +188,7 @@ paths:
   /samples/{id}/nearest-leaf-node:
     get:
       tags:
-        - distance
+        - leaf_get
       description: Return the nearest leaf node of a sample based on a sample ID.
       parameters:
         - name: id
@@ -204,6 +216,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     put:
+      tags:
+        - leaf_put
       description: Replace the nearest leaf node of a sample based on a sample ID.
       parameters:
         - name: id
@@ -239,6 +253,8 @@ paths:
                 $ref: '#/components/schemas/Error'
   /tree:
     post:
+      tags:
+        - tree_post
       description: Create a leaf node for the phylogenetic tree.
       requestBody:
         description: Leaf node to be added
@@ -268,7 +284,9 @@ paths:
                 $ref: '#/components/schemas/Error'
   /tree/{id}:
     get:
-      description: Return the list of nearest samples of a tree node based on an ID.
+      tags:
+        - tree_get
+      description: Return a tree node based on an ID.
       parameters:
         - name: id
           in: path
@@ -283,7 +301,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Neighbour'
+                  $ref: '#/components/schemas/Leaf'
         404:
           description: Not found
           content:
@@ -297,6 +315,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     delete:
+      tags:
+        - tree_delete
       description: Delete a leaf node based on an ID.
       parameters:
         - name: id
