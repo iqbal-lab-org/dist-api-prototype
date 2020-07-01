@@ -1,7 +1,7 @@
 from swagger_server.db import get_db
 from swagger_server.exceptions import NotFound
 from swagger_server.models import Error
-from swagger_server.ogm.sample_node import SampleNode
+from swagger_server.ogm.mappers import SampleNode
 
 
 def samples_id_delete(id):  # noqa: E501
@@ -22,4 +22,4 @@ def samples_id_delete(id):  # noqa: E501
     except NotFound:
         return Error(404, 'Not found'), 404
     else:
-        return '', 200
+        return '', 204

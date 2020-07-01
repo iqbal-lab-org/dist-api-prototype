@@ -1,13 +1,13 @@
 from swagger_server.db import get_db
 from swagger_server.exceptions import NotFound
 from swagger_server.models.error import Error  # noqa: E501
-from swagger_server.ogm.mappers import LeafNode
+from swagger_server.ogm.mappers import SampleNode
 
 
-def tree_id_delete(id):  # noqa: E501
-    """tree_id_delete
+def samples_id_nearest_leaf_node_delete(id):  # noqa: E501
+    """samples_id_nearest_leaf_node_delete
 
-    Delete a leaf node based on an ID. # noqa: E501
+    Delete the nearest leaf node associated with a sample based on a sample ID. # noqa: E501
 
     :param id:
     :type id: str
@@ -18,7 +18,8 @@ def tree_id_delete(id):  # noqa: E501
     sample_graph = get_db()
 
     try:
-        LeafNode.delete(id, sample_graph)
+        node = SampleNode.get(id, sample_graph)
+        node.detach_lineage(sample_graph)
     except NotFound:
         return Error(404, 'Not found'), 404
     else:
