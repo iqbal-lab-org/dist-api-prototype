@@ -133,7 +133,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Neighbour'
+                  $ref: '#/components/schemas/NeighbourRelationship'
         404:
           description: Not found
           content:
@@ -412,6 +412,27 @@ components:
             $ref: '#/components/schemas/Neighbour'
         nearest-leaf-node:
           $ref: '#/components/schemas/NearestLeaf'
+    NeighbourRelationship:
+      type: object
+      required:
+        - neighbour
+        - distance
+      properties:
+        neighbour:
+          $ref: '#/components/schemas/NeighbourSummary'
+        distance:
+          type: integer
+          format: int32
+    NeighbourSummary:
+      type: object
+      required:
+        - experiment_id
+        - leaf_id
+      properties:
+        experiment_id:
+          type: string
+        leaf_id:
+          type: string
     Neighbour:
       type: object
       required:
@@ -423,6 +444,8 @@ components:
         distance:
           type: integer
           format: int32
+        leaf_id:
+          type: string
     Leaf:
       type: object
       required:

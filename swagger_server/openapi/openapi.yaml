@@ -235,7 +235,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Neighbour'
+                  $ref: '#/components/schemas/NeighbourRelationship'
                 type: array
           description: OK
         "404":
@@ -444,8 +444,10 @@ components:
         nearest-neighbours:
         - distance: 0
           experiment_id: experiment_id
+          leaf_id: leaf_id
         - distance: 0
           experiment_id: experiment_id
+          leaf_id: leaf_id
       properties:
         experiment_id:
           type: string
@@ -458,16 +460,48 @@ components:
       required:
       - experiment_id
       type: object
+    NeighbourRelationship:
+      example:
+        distance: 0
+        neighbour:
+          experiment_id: experiment_id
+          leaf_id: leaf_id
+      properties:
+        neighbour:
+          $ref: '#/components/schemas/NeighbourSummary'
+        distance:
+          format: int32
+          type: integer
+      required:
+      - distance
+      - neighbour
+      type: object
+    NeighbourSummary:
+      example:
+        experiment_id: experiment_id
+        leaf_id: leaf_id
+      properties:
+        experiment_id:
+          type: string
+        leaf_id:
+          type: string
+      required:
+      - experiment_id
+      - leaf_id
+      type: object
     Neighbour:
       example:
         distance: 0
         experiment_id: experiment_id
+        leaf_id: leaf_id
       properties:
         experiment_id:
           type: string
         distance:
           format: int32
           type: integer
+        leaf_id:
+          type: string
       required:
       - distance
       - experiment_id

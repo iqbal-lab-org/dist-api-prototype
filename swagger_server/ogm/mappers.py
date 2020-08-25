@@ -99,6 +99,8 @@ class SampleNode(BaseGraphObject):
 
         for neighbour_node in neighbour_relationships:
             distance = neighbour_relationships.get(neighbour_node, 'distance')
-            sample.nearest_neighbours.append(Neighbour(neighbour_node.experiment_id, distance))
+            neighbour_leaf_node = next(iter(neighbour_node.lineage))
+            sample.nearest_neighbours.append(Neighbour(neighbour_node.experiment_id, distance,
+                                                       neighbour_leaf_node.leaf_id))
 
         return sample
