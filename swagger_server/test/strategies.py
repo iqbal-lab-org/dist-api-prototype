@@ -1,6 +1,6 @@
 from hypothesis.strategies import composite, text, integers, characters, lists, one_of, none
 
-from swagger_server.models import Sample, Neighbour, NearestLeaf, Leaf, NeighbourRelationship, NeighbourSummary
+from swagger_server.models import Sample, Neighbour, NearestLeaf, Leaf
 
 
 def experiment_ids():
@@ -41,28 +41,6 @@ def samples(draw, must_have_neighbours=False, must_have_leaf=False, leaf_id=None
         experiment_id=experiment_id,
         nearest_neighbours=draw(neighbours_strategy),
         nearest_leaf_node=draw(nearest_leaf_strategy)
-    )
-
-
-@composite
-def neighbour_relationships(draw):
-    neighbour_summary = draw(neighbour_summaries())
-    distance = draw(distances())
-
-    return NeighbourRelationship(
-        neighbour=neighbour_summary,
-        distance=distance
-    )
-
-
-@composite
-def neighbour_summaries(draw):
-    experiment_id = draw(experiment_ids())
-    leaf_id = draw(leaf_ids())
-
-    return NeighbourSummary(
-        experiment_id=experiment_id,
-        leaf_id=leaf_id
     )
 
 
