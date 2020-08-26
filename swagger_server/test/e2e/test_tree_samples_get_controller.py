@@ -35,8 +35,6 @@ def test_get_samples(tree, create_leaf, create_sample, get_samples_of_leaf, samp
             assert bool(sample.nearest_neighbours) == bool(created.nearest_neighbours)
             if sample.nearest_neighbours:
                 for neighbour in sample.nearest_neighbours:
-                    neighbour_relationship = \
-                    [x for x in created.nearest_neighbours if x.experiment_id == neighbour.experiment_id][0]
-                    assert neighbour_relationship.distance == neighbour.distance
+                    assert neighbour in created.nearest_neighbours
     finally:
         sample_graph.delete_all()

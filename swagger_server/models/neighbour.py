@@ -15,31 +15,26 @@ class Neighbour(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, experiment_id=None, distance=None, leaf_id=None):  # noqa: E501
+    def __init__(self, experiment_id=None, distance=None):  # noqa: E501
         """Neighbour - a model defined in OpenAPI
 
         :param experiment_id: The experiment_id of this Neighbour.  # noqa: E501
         :type experiment_id: str
         :param distance: The distance of this Neighbour.  # noqa: E501
         :type distance: int
-        :param leaf_id: The leaf_id of this Neighbour.  # noqa: E501
-        :type leaf_id: str
         """
         self.openapi_types = {
             'experiment_id': str,
-            'distance': int,
-            'leaf_id': str
+            'distance': int
         }
 
         self.attribute_map = {
             'experiment_id': 'experiment_id',
-            'distance': 'distance',
-            'leaf_id': 'leaf_id'
+            'distance': 'distance'
         }
 
         self._experiment_id = experiment_id
         self._distance = distance
-        self._leaf_id = leaf_id
 
     @classmethod
     def from_dict(cls, dikt) -> 'Neighbour':
@@ -97,24 +92,3 @@ class Neighbour(Model):
             raise ValueError("Invalid value for `distance`, must not be `None`")  # noqa: E501
 
         self._distance = distance
-
-    @property
-    def leaf_id(self):
-        """Gets the leaf_id of this Neighbour.
-
-
-        :return: The leaf_id of this Neighbour.
-        :rtype: str
-        """
-        return self._leaf_id
-
-    @leaf_id.setter
-    def leaf_id(self, leaf_id):
-        """Sets the leaf_id of this Neighbour.
-
-
-        :param leaf_id: The leaf_id of this Neighbour.
-        :type leaf_id: str
-        """
-
-        self._leaf_id = leaf_id

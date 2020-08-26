@@ -1,6 +1,6 @@
 from swagger_server.db import get_db
 from swagger_server.exceptions import NotFound
-from swagger_server.models import Error, NeighbourRelationship, NeighbourSummary
+from swagger_server.models import Error
 from swagger_server.ogm.mappers import SampleNode
 
 
@@ -27,18 +27,4 @@ def samples_id_nearest_neighbours_get(id):  # noqa: E501
         if not model.nearest_neighbours:
             return Error(404, 'Not found'), 404
         else:
-            model = node.to_model()
-
-            neighbour_relationships = []
-            for neighbour in model.nearest_neighbours:
-                neighbour_relationships.append(
-                    NeighbourRelationship(
-                        NeighbourSummary(
-                            experiment_id=neighbour.experiment_id,
-                            leaf_id=neighbour.leaf_id
-                        ),
-                        neighbour.distance
-                    )
-                )
-
-            return neighbour_relationships, 200
+            return node.to_model().nearest_neighbours, 200
