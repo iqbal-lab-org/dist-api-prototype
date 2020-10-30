@@ -3,6 +3,7 @@ import sys
 
 from py2neo import Graph
 
+from swagger_server.exceptions import NotFound
 from swagger_server.ogm.mappers import SampleNode
 
 if __name__ == '__main__':
@@ -12,7 +13,11 @@ if __name__ == '__main__':
         mapping = pickle.load(inf)
 
     for isolate_id, experiment_id in mapping.items():
-        sample = SampleNode.get(isolate_id, repo)
-        sample.experiment_id = experiment_id
-        repo.push(sample)
+        try:
+            sample = SampleNode.get(isolate_id, repo)
+        except NotFound:
+            continue
+        else:
+            sample.experiment_id = experiment_id
+            repo.push(sample)
 
