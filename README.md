@@ -4,26 +4,13 @@
 
 ## Start the development server
 ```shell script
-docker build -t dist .
-./scripts/run.sh
-```
-The script create a `./data` directory to persist Neo4j's data to the host machine. The Docker image will load a sample database if the directory `./data/databases/graph.db` does not exist (for example, at first run).
-
-If you want to restore the sample data, simply delete `./data` and run `./scripts/run.sh` again.
-
-## Init a new sample database (20 seconds on 8 CPUs)
-```shell script
-./scripts/regenerate_db.sh
+make build
+make run
 ```
 
-## Backup the current db
-```shell script
-./scripts/backup_db.sh # will dump to ./data/init.db.bak on host machine
+If you want to use the sample data, stop the server (you need the run the server at least once so it create the necessary directories), then
 ```
-
-## Tail application's logs
-```shell script
-make logs
+make load_db
 ```
 
 ## View the toy graph
@@ -49,11 +36,6 @@ curl --request GET 'localhost:8080/api/v1/samples/s1/nearest-leaf-node'
 #   "distance": 7,
 #   "leaf_id": "l857"
 # }
-```
-
-## Stop (& destroy) the development server
-```shell script
-docker stop dist
 ```
 
 # Development

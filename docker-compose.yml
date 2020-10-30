@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  dist:
+    build:
+      context: .
+    environment:
+      NEO4J_URI: "bolt://neo4j:7687"
+    ports:
+    - 8080:8080
+    links:
+      - neo4j
+
+  neo4j:
+    image: neo4j
+    environment:
+      NEO4J_AUTH: "none"
+    ports:
+    - 7474:7474
+    - 7687:7687
+    volumes:
+    - ./data:/var/lib/neo4j/data

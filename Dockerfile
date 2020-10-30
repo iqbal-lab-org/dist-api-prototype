@@ -1,11 +1,18 @@
-FROM python:3.8-slim-buster
+FROM python:3.8 AS builder
 
-RUN mkdir -p /usr/src/app
-COPY requirements.txt /usr/src/app/requirements.txt
-COPY swagger_server /usr/src/app/swagger_server
+RUN python -m venv /opt/venv
+ENV PATH=/opt/venv/bin:$PATH
+
 WORKDIR /usr/src/app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
-RUN pip3 install --no-cache-dir -r requirements.txt
+FROM python:3.8-slim-buster
+COPY --from=builder /opt/venv /opt/venv
+ENV PATH=/opt/venv/bin:$PATH
+
+WORKDIR /usr/src/app
+COPY . .
 
 EXPOSE 8080
 
