@@ -159,5 +159,13 @@ def get_samples_of_leaf(make_request):
     return request
 
 
+@fixture(scope="session")
+def get_resource(make_request):
+    def request(uri, *args, **kwargs):
+        return make_request(uri, 'GET', *args, **kwargs)
+
+    return request
+
+
 settings.register_profile('e2e', deadline=None)
 settings.load_profile('e2e')

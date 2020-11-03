@@ -29,4 +29,5 @@ def samples_id_patch(id, sample=None):  # noqa: E501
     except NotFound:
         return Error(404, 'Not found'), 404
     else:
-        return node.to_model(), 200
+        model = node.to_model()
+        return model, 200, {'location': model.experiment_id}

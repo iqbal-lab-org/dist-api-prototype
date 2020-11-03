@@ -10,7 +10,7 @@ def test_patching_non_existent_samples(sample, patch_sample):
 
 
 @given(sample=samples(), new_sample=samples())
-def test_patching_samples(sample, new_sample, patch_sample, create_sample, create_leaf, sample_graph):
+def test_patching_samples(sample, new_sample, patch_sample, create_sample, create_leaf, get_resource, sample_graph):
     try:
         if sample.nearest_leaf_node:
             create_leaf(sample.nearest_leaf_node, ensure=True)
@@ -30,5 +30,8 @@ def test_patching_samples(sample, new_sample, patch_sample, create_sample, creat
                 assert neighbour in sample.nearest_neighbours
         else:
             assert not patched.nearest_neighbours
+
+        from_location_header = Sample.from_dict(get_resource(response.location, ensure=True).json)
+        assert from_location_header == patched
     finally:
         sample_graph.delete_all()

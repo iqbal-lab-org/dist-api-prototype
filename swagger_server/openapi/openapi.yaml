@@ -175,6 +175,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Sample'
           description: OK
+          headers:
+            Location:
+              description: uri for the new sample
+              explode: false
+              schema:
+                type: string
+              style: simple
         "404":
           content:
             application/json:
