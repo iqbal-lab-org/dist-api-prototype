@@ -54,8 +54,11 @@ class SampleNode(BaseGraphObject):
 
     @classmethod
     def update(cls, experiment_id: str, graph: Graph, neighbours: List[Neighbour] = None,
-               leaf: NearestLeaf = None) -> 'SampleNode':
+               leaf: NearestLeaf = None, new_id: str = None) -> 'SampleNode':
         node = cls.get(experiment_id, graph)
+
+        if new_id is not None:
+            node.experiment_id = new_id
 
         if neighbours is not None:
             node.neighbours.clear()

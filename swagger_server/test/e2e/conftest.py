@@ -70,6 +70,14 @@ def get_sample(make_request):
 
 
 @fixture(scope="session")
+def patch_sample(make_request):
+    def request(experiment_id, sample, *args, **kwargs):
+        return make_request(f'{API_ROOT}/samples/{experiment_id}', 'PATCH', json=sample, *args, **kwargs)
+
+    return request
+
+
+@fixture(scope="session")
 def delete_sample(make_request):
     def request(experiment_id):
         return make_request(f'{API_ROOT}/samples/{experiment_id}', 'DELETE', success_code=204)
@@ -147,6 +155,14 @@ def delete_leaf(make_request):
 def get_samples_of_leaf(make_request):
     def request(leaf_id):
         return make_request(f'{API_ROOT}/tree/{leaf_id}/samples', 'GET')
+
+    return request
+
+
+@fixture(scope="session")
+def get_resource(make_request):
+    def request(uri, *args, **kwargs):
+        return make_request(uri, 'GET', *args, **kwargs)
 
     return request
 

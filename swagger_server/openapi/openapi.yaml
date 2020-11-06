@@ -150,6 +150,53 @@ paths:
       tags:
       - samples_get
       x-openapi-router-controller: swagger_server.controllers.samples_get_controller
+    patch:
+      description: Update a sample based on its ID.
+      operationId: samples_id_patch
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sample'
+        description: New sample data
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sample'
+          description: OK
+          headers:
+            Location:
+              description: uri for the new sample
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Not found
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      tags:
+      - samples_patch
+      x-openapi-router-controller: swagger_server.controllers.samples_patch_controller
   /samples/{id}/nearest-leaf-node:
     delete:
       description: Delete the nearest leaf node associated with a sample based on
