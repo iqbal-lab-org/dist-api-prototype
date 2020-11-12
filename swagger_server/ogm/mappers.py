@@ -66,8 +66,8 @@ class SampleNode(BaseGraphObject):
             for neighbour in neighbours:
                 n = SampleNode()
                 n.experiment_id = neighbour.experiment_id
-                if n.exists(graph):
-                    node.neighbours.add(n, distance=neighbour.distance)
+                # if n.exists(graph):
+                node.neighbours.add(n, distance=neighbour.distance)
 
         if leaf is not None:
             node.lineage.clear()
