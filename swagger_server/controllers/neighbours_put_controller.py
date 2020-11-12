@@ -29,4 +29,5 @@ def samples_id_nearest_neighbours_put(id, neighbour=None):  # noqa: E501
     except NotFound:
         return Error(404, 'Not found'), 404
     else:
-        return updated.to_model().nearest_neighbours, 200
+        # return updated.to_model().nearest_neighbours, 200
+        return "", 200
